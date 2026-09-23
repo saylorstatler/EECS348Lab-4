@@ -5,7 +5,14 @@ int main() {
 
     while (1) {
         printf("Enter the NFL score (Enter 1 to stop): ");
-        scanf("%d", &score);
+        int n = scanf("%d", &score);
+
+        if (n != 1) {
+            printf("Invalid input. Please enter a number.\n");
+
+            while (getchar() != '\n');
+            continue;
+        }
 
         if (score == 1) {
             break;
@@ -16,7 +23,7 @@ int main() {
             continue;
         }
 
-        printf("Possible combinations of scoring plays if a team’s score is %d:\n", score);
+        printf("Possible combinations of scoring plays if a team's score is %d:\n", score);
 
         int found = 0;
 
@@ -24,7 +31,9 @@ int main() {
             for (int td7 = 0; td7 * 7 <= score; td7++) {
                 for (int td6 = 0; td6 * 6 <= score; td6++) {
                     for (int fg = 0; fg * 3 <= score; fg++) {
-                        int remaining = score - (td2 * 8 + td7 * 7 + td6 * 6 + fg * 3);
+
+                        int remaining = score -
+                            (td2 * 8 + td7 * 7 + td6 * 6 + fg * 3);
 
                         if (remaining >= 0 && remaining % 2 == 0) {
                             int safety = remaining / 2;
